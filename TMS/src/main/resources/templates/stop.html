@@ -1,0 +1,25 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<title>Register Time</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>STOP</h1>
+	<form th:action="@{/stop}" method="post" title="reg">
+		<input type="hidden" th:field="*{timeLog}">
+		<p>
+		<input type="submit" value="Register Stop Time" />
+		</p>
+		<input type="hidden" th:name="userId" th:value="${userId}"/>
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+	</form>
+
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
+</body>
+</body>
+</html>
