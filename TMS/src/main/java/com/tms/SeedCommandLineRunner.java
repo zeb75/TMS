@@ -55,7 +55,7 @@ public class SeedCommandLineRunner implements CommandLineRunner{
 		}
 		
 		
-		System.out.println("Checking Admin user.");
+		System.out.println("Checking Admin account.");
 		User user = userRepository.findByEmail("admin@admin.com");
 		if(user == null) {
 			user = new User();
@@ -69,7 +69,27 @@ public class SeedCommandLineRunner implements CommandLineRunner{
 			userRepository.save(user);
 			user.setRoles(new HashSet<Role>(Arrays.asList(roleAdmin)));
 			userRepository.save(user);
-			System.out.println("Seeding Admin user.");
+			System.out.println("Seeding Admin account.");
+		}
+		else {
+			System.out.println("ADMIN account OK.");
+		}
+		
+		System.out.println("Checking User Account.");
+		User user1 = userRepository.findByEmail("user@user.com");
+		if(user1 == null) {
+			user1 = new User();
+			user1.setName("User");
+			user1.setLastName("UserAccount");
+			user1.setPassword(bCryptPasswordEncoder.encode("test1"));
+			user1.setEmail("user@user.com");
+			user1.setSalaryPerHour(99);
+			user1.setHasStartedTime(false);
+			user1.setActive(1);
+			userRepository.save(user1);
+			user1.setRoles(new HashSet<Role>(Arrays.asList(roleUser)));
+			userRepository.save(user1);
+			System.out.println("Seeding USER account.");
 		}
 		else {
 			System.out.println("ADMIN user OK.");

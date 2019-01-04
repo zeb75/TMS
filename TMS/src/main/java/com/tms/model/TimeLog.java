@@ -1,6 +1,6 @@
 package com.tms.model;
 
-import java.time.Duration;
+//import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -34,8 +34,8 @@ public class TimeLog {
 
 	private LocalDateTime stopTime;
 
-	private Duration registeredTime;
+//	private Duration registeredTime;
 
-	private String timeCategory;
+//	private String timeCategory;
 
 }

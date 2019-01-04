@@ -30,36 +30,35 @@ import com.tms.repository.TimeLogRepository;
 		}
 
 		@PostMapping("/start")
-		public String startTime(@ModelAttribute("start")TimeLog timeLog, Model model, String userId) {
+		public String startTime( Model model, String userId) {
+			
+			TimeLog timeLog = new TimeLog();
 			
 			timeLog.setStartTime(LocalDateTime.now());
-			System.out.println(userId + "fu");
 			timeLog.setUserId(Integer.parseInt(userId));
-			timeLog = timeLogRepository.save(timeLog);
+			
+			timeLogRepository.save(timeLog);
+			
 			model.addAttribute("userId", userId);
-			model.addAttribute("timeLog", timeLog);
+			model.addAttribute("timeLog", timeLog.getId());
+			
 			return "stop";
 		}
 		
-
+	
 		@PostMapping("/stop")
-		public String stop(@ModelAttribute("stop")TimeLog timeLog, Model model, String userId) {
+		public String start(Model model, String userId, Integer timeLog) {
 			
-			Iterable<TimeLog> timeLogList = timeLogRepository.findAll(); //Create a list and add the timelog to it
-			
-			int i = ((List<TimeLog>) timeLogList).size() -1; //Find the last index in the list
-			
-			TimeLog tl = ((List<TimeLog>) timeLogList).get(i); // Get object 
-			
-//			int id = tl.getTimeLogId(); //Get id
+			TimeLog tl = timeLogRepository.findById(timeLog).get();
 			
 			tl.setStopTime(LocalDateTime.now());
 			
 			timeLogRepository.save(tl);
-			System.out.println(tl);
 			
 			model.addAttribute("userId", userId);
-			
+		    model.addAttribute("timeLog", tl );
+
 			return "start";
 		}
+		
 }
