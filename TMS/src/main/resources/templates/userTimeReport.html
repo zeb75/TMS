@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User report</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CSS.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- <div class="containerNav">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/UserTimeReport">Time report</a></li>
+                    </ul>
+                    <li class="LogoUt"><a><form th:action="@{/logout}" method="get">
+                        <button class="btn btn-md btn-danger btn-block" name="registration"
+                                type="Submit">Logout
+                        </button>
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}" />
+                    </form></a>
+                    </li>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div> -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 th:inline="text">Welcome user [[${#httpServletRequest.remoteUser}]]!</h1>
+    </div>
+</div>
+
+<form th:action="@{/userTimeReport}"  method="post">
+
+    Start Date:
+    <input class="form-control" type="date"  name="startTime" >
+    <br><br>
+    End Date:
+    <input class="form-control" type="date"  name="stopTime" >
+    <br><br>
+    <input type="submit">
+    <input type="hidden" th:name="userId" th:value="${userId}"/>
+    <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+    <!--<input type="hidden" th:name="timeLog" th:value="${timeLog}"/>-->
+</form><br><br>
+<table>
+    <tr th:each="reportTime : ${reportTimes}">
+        <td><span th:text="${reportTime.startTime}"> Start time </span></td>
+        <td><span th:text="${reportTime.stopTime}"> Stop time </span></td>
+<!--         <td><span th:text="${reportTime.userId}"> User ID </span></td> -->
+    </tr>
+</table>
+
+<!--<form th:action="@{/UserTimeReport}" method="get">-->
+    <!--<button class="btn btn-md btn-danger btn-block" name="registration"-->
+            <!--type="Submit">Time report-->
+    <!--</button>-->
+    <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+<!--</form>-->
+</body>
+</html>
